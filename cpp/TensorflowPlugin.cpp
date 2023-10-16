@@ -64,12 +64,12 @@ void TensorflowPlugin::installToRuntime(jsi::Runtime& runtime,
         auto promise =
             Promise::createPromise(runtime, [=, &runtime](std::shared_ptr<Promise> promise) {
               // Launch async thread
+              Buffer buffer = fetchURL(modelPath);
+              // Load Model into Tensorflow
+              auto model = TfLiteModelCreate(buffer.data, buffer.size);
               std::async(std::launch::async, [=, &runtime]() {
                 // Fetch model from URL (JS bundle)
-                Buffer buffer = fetchURL(modelPath);
 
-                // Load Model into Tensorflow
-                auto model = TfLiteModelCreate(buffer.data, buffer.size);
                 if (model == nullptr) {
                   callInvoker->invokeAsync([=]() {
                     promise->reject("Failed to load model from \"" + modelPath + "\"!");

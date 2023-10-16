@@ -31,12 +31,10 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\" --fix",
     "lint-cpp": "scripts/clang-format.sh",
-    "prepare": "git submodule update --init --recursive",
     "update-submodule": "git submodule update --remote --merge",
     "prepack": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "configure": "git submodule update --init --recursive && cd tensorflow && ./configure",
     "bootstrap": "yarn && yarn example && yarn example pods && yarn configure",
     "build-tflite-ios": "./scripts/build-tensorflow-ios.sh"
   },
@@ -93,7 +91,6 @@
   "engines": {
     "node": ">= 16.0.0"
   },
-  "packageManager": "^yarn@1.22.15",
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [

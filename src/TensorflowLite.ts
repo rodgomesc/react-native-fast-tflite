@@ -41,16 +41,16 @@ interface Tensor {
    * The data-type all values of this Tensor are represented in.
    */
   dataType:
-    | 'bool'
-    | 'uint8'
-    | 'int8'
-    | 'int16'
-    | 'int32'
-    | 'int64'
-    | 'float16'
-    | 'float32'
-    | 'float64'
-    | 'invalid'
+  | 'bool'
+  | 'uint8'
+  | 'int8'
+  | 'int16'
+  | 'int32'
+  | 'int64'
+  | 'float16'
+  | 'float32'
+  | 'float64'
+  | 'invalid'
   /**
    * The shape of the data from this tensor.
    */
@@ -91,18 +91,18 @@ type ModelSource = Require | { url: string }
 
 export type TensorflowPlugin =
   | {
-      model: TensorflowModel
-      state: 'loaded'
-    }
+    model: TensorflowModel
+    state: 'loaded'
+  }
   | {
-      model: undefined
-      state: 'loading'
-    }
+    model: undefined
+    state: 'loading'
+  }
   | {
-      model: undefined
-      error: Error
-      state: 'error'
-    }
+    model: undefined
+    error: Error
+    state: 'error'
+  }
 
 /**
  * Load a Tensorflow Lite Model from the given `.tflite` asset.
@@ -158,6 +158,7 @@ export function useTensorflowModel(
       try {
         setState({ model: undefined, state: 'loading' })
         const m = await loadTensorflowModel(source, delegate)
+
         setState({ model: m, state: 'loaded' })
         console.log('Model loaded!')
       } catch (e) {
